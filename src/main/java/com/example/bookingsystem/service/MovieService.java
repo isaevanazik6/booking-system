@@ -10,6 +10,6 @@ public interface MovieService {
     Long createMovie(Movie movie);
     List<MovieEntity> getAllMovies();
     Optional<Movie> getMovieById(Long id);
-    MovieEntity updateMovie(Movie updatedMovie);
+    Long updateMovie(Movie updatedMovie);
     void deleteMovie(Long id);
 }

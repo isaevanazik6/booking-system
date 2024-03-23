@@ -41,7 +41,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     // Update
-    public MovieEntity updateMovie(Movie updatedMovie) {
+    public Long updateMovie(Movie updatedMovie) {
         Optional<MovieEntity> existingMovieOptional = movieEntityRepository.findById(updatedMovie.getId());
         if (existingMovieOptional.isPresent()) {
             MovieEntity existingMovie = existingMovieOptional.get();
@@ -51,7 +51,7 @@ public class MovieServiceImpl implements MovieService {
             existingMovie.setDuration(updatedMovie.getDuration());
             existingMovie.setCountry(updatedMovie.getCountry());
             existingMovie.setDescription(updatedMovie.getDescription());
-            return movieEntityRepository.save(existingMovie);
+            return movieEntityRepository.save(existingMovie).getId();
         } else {
             throw new RuntimeException("Movie with id " + updatedMovie.getId() + " not found");
         }
