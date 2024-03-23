@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -11,16 +12,16 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "cinema")
-public class CinemaEntity {
+@Table(name = "movie_sessions")
+public class MovieSessionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     Long id;
-    @Column(name = "name")
-    String name;
-    @Column(name = "location")
-    String location;
-    @Column(name = "capacities")
-    String capacity;
+    @ManyToOne
+    @JoinColumn(name = "cinema_id", nullable = false)
+    CinemaEntity cinema;
+    @ManyToOne
+    @JoinColumn(name = "movie_id", nullable = false)
+    MovieEntity movie;
+    LocalDateTime showTime;
 }

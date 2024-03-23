@@ -12,7 +12,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "movie")
 public class MovieEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -35,11 +34,4 @@ public class MovieEntity {
 
     @Column(name = "description")
     String description;
-
-    @Column(name = "likes")
-    Integer likes;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "cinema_id")
-    CinemaEntity cinema;
 }

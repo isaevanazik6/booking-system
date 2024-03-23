@@ -1,6 +1,6 @@
 package com.example.bookingsystem.controller;
 
-import com.example.bookingsystem.dto.MovieRequest;
+import com.example.bookingsystem.dto.Movie;
 import com.example.bookingsystem.entity.MovieEntity;
 import com.example.bookingsystem.service.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class MovieController {
     private final MovieService movieService;
 
     @PostMapping
-    public ResponseEntity<Long> createMovie(@RequestBody MovieRequest movie) {
+    public ResponseEntity<Long> createMovie(@RequestBody Movie movie) {
         Long movieId = movieService.createMovie(movie);
         return new ResponseEntity<>(movieId, HttpStatus.CREATED);
     }
@@ -31,16 +31,15 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieRequest> getMovieById(@PathVariable Long id) {
-        Optional<MovieRequest> movieOptional = movieService.getMovieById(id);
+    public ResponseEntity<Movie> getMovieById(@PathVariable Long id) {
+        Optional<Movie> movieOptional = movieService.getMovieById(id);
         return movieOptional.map(movie -> ResponseEntity.ok().body(movie))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Long> updateMovie(@PathVariable Long id, @RequestBody MovieRequest movie) {
-        movie.setId(id);
-        Long updatedMovieId = movieService.updateMovie(movie);
+    public ResponseEntity<Long> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
+        Long updatedMovieId = movieService.updateMovie(movie, id);
         return ResponseEntity.ok(updatedMovieId);
     }
 

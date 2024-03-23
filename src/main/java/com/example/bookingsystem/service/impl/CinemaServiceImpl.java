@@ -1,6 +1,6 @@
 package com.example.bookingsystem.service.impl;
 
-import com.example.bookingsystem.dto.CinemaRequest;
+import com.example.bookingsystem.dto.Cinema;
 import com.example.bookingsystem.entity.CinemaEntity;
 import com.example.bookingsystem.mapper.CinemaMapper;
 import com.example.bookingsystem.repository.CinemaRepository;
@@ -21,7 +21,7 @@ public class CinemaServiceImpl implements CinemaService {
     private final CinemaMapper cinemaMapper;
 
     @Override
-    public Long createCinema(CinemaRequest cinema) {
+    public Long createCinema(Cinema cinema) {
         CinemaEntity cinemaEntity = new CinemaEntity();
         cinemaEntity.setName(cinema.getName());
         return cinemaRepository.save(cinemaEntity).getId();
@@ -33,21 +33,21 @@ public class CinemaServiceImpl implements CinemaService {
     }
 
     @Override
-    public Optional<CinemaRequest> getCinemaById(Long id) {
+    public Optional<Cinema> getCinemaById(Long id) {
         return cinemaRepository
                 .findById(id)
                 .map(cinemaMapper::toDto);
     }
 
     @Override
-    public Long updateCinema(CinemaRequest updatedCinema) {
-        Optional<CinemaEntity> existingMovieOptional = cinemaRepository.findById(updatedCinema.getId());
+    public Long updateCinema(Cinema updatedCinema, Long cinemaId) {
+        Optional<CinemaEntity> existingMovieOptional = cinemaRepository.findById(cinemaId);
         if (existingMovieOptional.isPresent()) {
             CinemaEntity existingMovie = existingMovieOptional.get();
             existingMovie.setName(updatedCinema.getName());
             return cinemaRepository.save(existingMovie).getId();
         } else {
-            throw new RuntimeException("MovieRequest with id " + updatedCinema.getId() + " not found");
+            throw new RuntimeException("Movie with id " + cinemaId + " not found");
         }
     }
 

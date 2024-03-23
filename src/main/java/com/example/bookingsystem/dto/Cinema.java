@@ -1,5 +1,6 @@
 package com.example.bookingsystem.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -10,12 +11,11 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MovieRequest {
-    Long id;
+public class Cinema {
+    @NotNull(message = "'name' field cannot be empty!")
     String name;
-    Integer yearOfCreation;
-    String director;
-    String duration;
-    String country;
-    String description;
+    @NotNull(message = "'location' field cannot be empty!")
+    String location;
+    @NotNull(message = "'capacity' field cannot be empty!")
+    String capacity;
 }

@@ -1,5 +1,5 @@
 package com.example.bookingsystem.controller;
-import com.example.bookingsystem.dto.CinemaRequest;
+import com.example.bookingsystem.dto.Cinema;
 import com.example.bookingsystem.entity.CinemaEntity;
 import com.example.bookingsystem.service.CinemaService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class CinemaController {
     private final CinemaService cinemaService;
 
     @PostMapping
-    public ResponseEntity<Long> createCinema(@RequestBody CinemaRequest cinema) {
+    public ResponseEntity<Long> createCinema(@RequestBody Cinema cinema) {
         Long cinemaId = cinemaService.createCinema(cinema);
         return new ResponseEntity<>(cinemaId, HttpStatus.CREATED);
     }
@@ -30,16 +30,15 @@ public class CinemaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CinemaRequest> getCinemaById(@PathVariable Long id) {
-        Optional<CinemaRequest> cinemaOptional = cinemaService.getCinemaById(id);
+    public ResponseEntity<Cinema> getCinemaById(@PathVariable Long id) {
+        Optional<Cinema> cinemaOptional = cinemaService.getCinemaById(id);
         return cinemaOptional.map(cinema -> ResponseEntity.ok().body(cinema))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Long> updateCinema(@PathVariable Long id, @RequestBody CinemaRequest cinema) {
-        cinema.setId(id);
-        Long updatedCinemaId = cinemaService.updateCinema(cinema);
+    public ResponseEntity<Long> updateCinema(@PathVariable Long id, @RequestBody Cinema cinema) {
+        Long updatedCinemaId = cinemaService.updateCinema(cinema, id);
         return ResponseEntity.ok(updatedCinemaId);
     }
 

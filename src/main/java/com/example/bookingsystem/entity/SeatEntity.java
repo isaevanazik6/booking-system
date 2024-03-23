@@ -1,5 +1,6 @@
 package com.example.bookingsystem.entity;
 
+import com.example.bookingsystem.entity.enum_classes.StatusSeat;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -11,28 +12,19 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "rents")
-public class RentEntity {
-
+@Table(name = "seats")
+public class SeatEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     Long id;
-
     @Column(name = "row")
-    String row;
-
+    Integer row;
     @Column(name = "place")
-    String place;
-
-    @Column(name = "is_rent")
-    Boolean isRent;
-
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
-    StatusRent statusRent;
-
+    Integer place;
+    @Column(name = "seat_status")
+    StatusSeat statusSeat;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "movie_id")
-    MovieEntity movie;
+    @JoinColumn(name = "session_id")
+    MovieSessionEntity session;
 }

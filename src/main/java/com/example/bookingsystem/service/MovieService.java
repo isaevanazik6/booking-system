@@ -1,15 +1,15 @@
 package com.example.bookingsystem.service;
 
-import com.example.bookingsystem.dto.MovieRequest;
+import com.example.bookingsystem.dto.Movie;
 import com.example.bookingsystem.entity.MovieEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface MovieService {
-    Long createMovie(MovieRequest movie);
+    Long createMovie(Movie movie);
     List<MovieEntity> getAllMovies();
-    Optional<MovieRequest> getMovieById(Long id);
-    Long updateMovie(MovieRequest updatedMovie);
+    Optional<Movie> getMovieById(Long id);
+    Long updateMovie(Movie updatedMovie, Long movieId);
     void deleteMovie(Long id);
 }
