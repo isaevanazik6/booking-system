@@ -6,16 +6,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
 @Getter
 @Setter
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Movie {
+public class CinemaRequest {
     Long id;
     String name;
-    Integer yearOfCreation;
-    String director;
-    String duration;
-    String country;
-    String description;
+    LocalDateTime createdAt;
 }

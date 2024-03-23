@@ -1,18 +1,27 @@
 package com.example.bookingsystem.dto;
 
+import com.example.bookingsystem.entity.StatusRent;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Cinema {
+public class RentRequest {
     Long id;
-    String name;
-    LocalDateTime createdAt;
+
+    String row;
+
+    String place;
+
+    Boolean isRent;
+
+    StatusRent statusRent;
+
+    Long movieId;
 }

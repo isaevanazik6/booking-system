@@ -1,13 +1,13 @@
 package com.example.bookingsystem.service;
 
-import com.example.bookingsystem.dto.Rent;
+import com.example.bookingsystem.dto.RentRequest;
 
 import java.util.Optional;
 
 public interface RentService {
-    public Optional<Rent> getById(Long id);
+    Optional<RentRequest> getById(Long id);
 
-    public String addRent(Long id);
+    String rentPlace(Long id);
 
-    public String rollbackRent(Long id);
+    String rollbackRent(Long id);
 }

@@ -1,11 +1,13 @@
 package com.example.bookingsystem.service.impl;
 
-import com.example.bookingsystem.dto.Rent;
+import com.example.bookingsystem.dto.RentRequest;
 import com.example.bookingsystem.entity.StatusRent;
 import com.example.bookingsystem.mapper.RentMapper;
 import com.example.bookingsystem.repository.RentRepository;
 import com.example.bookingsystem.service.RentService;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -15,13 +17,14 @@ import static com.example.bookingsystem.entity.StatusRent.IN_PROGRESS;
 
 @RequiredArgsConstructor
 @Transactional
+@Service
 public class RentServiceImpl implements RentService {
 
     private final RentRepository rentRepository;
     private final RentMapper rentMapper;
 
     @Override
-    public Optional<Rent> getById(Long id) {
+    public Optional<RentRequest> getById(Long id) {
 
         return rentRepository
                 .findById(id)
@@ -29,18 +32,18 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public String addRent(Long id) {
+    public String rentPlace(Long id) {
 
         var rent = rentRepository
                         .findById(id)
-                        .orElseThrow(() -> new RuntimeException("Rent not found!"));
+                        .orElseThrow(() -> new RuntimeException("RentRequest not found!"));
 
         switch (rent.getStatusRent()) {
             case IN_PROGRESS -> {
-                return "Rent is in progress";
+                return "RentRequest is in progress";
             }
             case NOT_AVAILABLE -> {
-                return "Rent is in been not free";
+                return "RentRequest is in been not free";
             }
             default -> {
                 rent.setStatusRent(IN_PROGRESS);
@@ -55,13 +58,13 @@ public class RentServiceImpl implements RentService {
 
         var rent = rentRepository
                                 .findById(id)
-                                .orElseThrow(() -> new RuntimeException("Rent not found!"));
+                                .orElseThrow(() -> new RuntimeException("RentRequest not found!"));
 
         if(rent.getStatusRent().equals(IN_PROGRESS)) {
             rent.setIsRent(Boolean.TRUE);
             rent.setStatusRent(StatusRent.AVAILABLE);
         }
 
-        return "Rollback Rent";
+        return "Rollback RentRequest";
     }
 }

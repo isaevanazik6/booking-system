@@ -1,7 +1,6 @@
 package com.example.bookingsystem.rent;
 
-import com.example.bookingsystem.dto.Rent;
-import com.example.bookingsystem.entity.RentEntity;
+import com.example.bookingsystem.dto.RentRequest;
 import com.example.bookingsystem.entity.StatusRent;
 import com.example.bookingsystem.mapper.RentMapper;
 import com.example.bookingsystem.repository.RentRepository;
@@ -40,13 +39,13 @@ public class RentServiceTest {
 
     @Test
     public void testGetById() {
-        // Создание mock объекта Rent
-        Rent mockRent = new Rent();
+        // Создание mock объекта RentRequest
+        RentRequest mockRent = new RentRequest();
         mockRent.setId(1L);
         when(rentRepository.findById(1L)).thenReturn(Optional.of(rentMapper.toEntity(mockRent)));
 
         // Вызов метода для тестирования
-        Optional<Rent> result = rentService.getById(1L);
+        Optional<RentRequest> result = rentService.getById(1L);
 
         // Проверка результата
         assertEquals(1L, result.get().getId());
@@ -55,44 +54,44 @@ public class RentServiceTest {
 
     @Test
     public void testAddRentInProgress() {
-        // Создание mock объекта Rent
-        Rent mockRent = new Rent();
+        // Создание mock объекта RentRequest
+        RentRequest mockRent = new RentRequest();
         mockRent.setStatusRent(IN_PROGRESS);
         when(rentRepository.findById(anyLong())).thenReturn(Optional.of(rentMapper.toEntity(mockRent)));
 
         // Вызов метода для тестирования
-        String result = rentService.addRent(1L);
+        String result = rentService.rentPlace(1L);
 
         // Проверка результата
-        assertEquals("Rent is in progress", result);
+        assertEquals("RentRequest is in progress", result);
         verify(rentRepository, never()).save(any());
     }
 
     @Test
     public void testAddRentNotAvailable() {
-        // Создание mock объекта Rent
-        Rent mockRent = new Rent();
+        // Создание mock объекта RentRequest
+        RentRequest mockRent = new RentRequest();
         mockRent.setStatusRent(NOT_AVAILABLE);
         when(rentRepository.findById(anyLong())).thenReturn(Optional.of(rentMapper.toEntity(mockRent)));
 
         // Вызов метода для тестирования
-        String result = rentService.addRent(1L);
+        String result = rentService.rentPlace(1L);
 
         // Проверка результата
-        assertEquals("Rent is in been not free", result);
+        assertEquals("RentRequest is in been not free", result);
         verify(rentRepository, never()).save(any());
     }
 
     @Test
     public void testAddRentSuccess() {
-        // Создание mock объекта Rent
-        Rent mockRent = new Rent();
+        // Создание mock объекта RentRequest
+        RentRequest mockRent = new RentRequest();
         mockRent.setStatusRent(StatusRent.AVAILABLE);
         when(rentRepository.findById(anyLong())).thenReturn(Optional.of(rentMapper.toEntity(mockRent)));
         when(rentRepository.save(any())).thenReturn(mockRent);
 
         // Вызов метода для тестирования
-        String result = rentService.addRent(1L);
+        String result = rentService.rentPlace(1L);
 
         // Проверка результата
         assertEquals("Status in Progress", result);
@@ -101,8 +100,8 @@ public class RentServiceTest {
 
     @Test
     public void testRollbackRentInProgress() {
-        // Создание mock объекта Rent
-        Rent mockRent = new Rent();
+        // Создание mock объекта RentRequest
+        RentRequest mockRent = new RentRequest();
         mockRent.setStatusRent(IN_PROGRESS);
         when(rentRepository.findById(anyLong())).thenReturn(Optional.of(rentMapper.toEntity(mockRent)));
 
@@ -110,7 +109,7 @@ public class RentServiceTest {
         String result = rentService.rollbackRent(1L);
 
         // Проверка результата
-        assertEquals("Rollback Rent", result);
+        assertEquals("Rollback RentRequest", result);
         assertEquals(StatusRent.AVAILABLE, mockRent.getStatusRent());
         assertTrue(mockRent.getIsRent());
         verify(rentRepository, times(1)).save(rentMapper.toEntity(mockRent));
@@ -118,8 +117,8 @@ public class RentServiceTest {
 
     @Test
     public void testRollbackRentNotInProgress() {
-        // Создание mock объекта Rent
-        Rent mockRent = new Rent();
+        // Создание mock объекта RentRequest
+        RentRequest mockRent = new RentRequest();
         mockRent.setStatusRent(NOT_AVAILABLE);
         when(rentRepository.findById(anyLong())).thenReturn(Optional.of(rentMapper.toEntity(mockRent)));
 
@@ -127,7 +126,7 @@ public class RentServiceTest {
         String result = rentService.rollbackRent(1L);
 
         // Проверка результата
-        assertEquals("Rollback Rent", result); // Можно либо возвращать статус, либо бросать исключение, в зависимости от требований
+        assertEquals("Rollback RentRequest", result); // Можно либо возвращать статус, либо бросать исключение, в зависимости от требований
         verify(rentRepository, never()).save(any());
     }
 }
