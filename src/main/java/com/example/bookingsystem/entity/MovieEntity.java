@@ -20,7 +20,7 @@ public class MovieEntity {
     @Column(name = "name")
     String name;
 
-    @Column(name = "year")
+    @Column(name = "movie_year")
     Integer yearOfCreation;
 
     @Column(name = "director")

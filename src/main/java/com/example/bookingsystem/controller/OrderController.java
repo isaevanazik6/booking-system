@@ -23,14 +23,14 @@ public class OrderController {
     }
 
     @PostMapping("/confirm/{id}")
-    public ResponseEntity<String> confirmOrder(@PathVariable Long id) {
-        String status = orderService.confirmOrder(id);
+    public ResponseEntity<String> confirmOrder(@PathVariable Long id, @RequestParam("seat") Long seatId) {
+        String status = orderService.confirmOrder(id, seatId);
         return ResponseEntity.ok(status);
     }
 
     @PostMapping("/rollback/{id}")
-    public ResponseEntity<String> rollbackOrder(@PathVariable Long id) {
-        String status = orderService.rollbackPayment(id);
+    public ResponseEntity<String> rollbackOrder(@PathVariable Long id, @RequestParam("seat") Long seatId) {
+        String status = orderService.rollbackPayment(id, seatId);
         return ResponseEntity.ok(status);
     }
 }

@@ -2,13 +2,13 @@ CREATE TABLE cinema (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     location VARCHAR(255),
-    capacities VARCHAR(255),
+    capacities VARCHAR(255)
 );
 
 CREATE TABLE movie (
      id INT AUTO_INCREMENT PRIMARY KEY,
      name VARCHAR(255),
-     year INT,
+     movie_year INT,
      director VARCHAR(255),
      duration VARCHAR(255),
      country VARCHAR(255),
@@ -26,9 +26,9 @@ CREATE TABLE movie_sessions (
 
 CREATE TABLE seats (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    row INT,
+    seat_row INT,
     place INT,
-    seat_status VARCHAR(255),
+    seat_status VARCHAR(255) DEFAULT 'AVAILABLE',
     session_id INT,
     FOREIGN KEY (session_id) REFERENCES movie_sessions(id)
 );

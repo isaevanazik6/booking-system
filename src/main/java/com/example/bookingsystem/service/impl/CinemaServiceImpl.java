@@ -24,6 +24,8 @@ public class CinemaServiceImpl implements CinemaService {
     public Long createCinema(Cinema cinema) {
         CinemaEntity cinemaEntity = new CinemaEntity();
         cinemaEntity.setName(cinema.getName());
+        cinemaEntity.setLocation(cinema.getLocation());
+        cinemaEntity.setCapacity(cinema.getCapacity());
         return cinemaRepository.save(cinemaEntity).getId();
     }
 

@@ -17,4 +17,5 @@ public class Order {
     @Min(value = 100, message = "totalPrice cannot be less than 100!")
     Double totalPrice;
     Long sessionId;
+    Long seatId;
 }

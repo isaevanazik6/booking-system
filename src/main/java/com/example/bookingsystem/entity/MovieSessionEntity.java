@@ -17,10 +17,10 @@ public class MovieSessionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "cinema_id", nullable = false)
     CinemaEntity cinema;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "movie_id", nullable = false)
     MovieEntity movie;
     LocalDateTime showTime;

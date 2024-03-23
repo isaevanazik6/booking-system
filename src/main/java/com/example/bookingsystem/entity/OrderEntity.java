@@ -30,6 +30,6 @@ public class OrderEntity {
     Timestamp created_at;
     Timestamp updated_at;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "session_id")
+    @JoinColumn(name = "session_id", nullable = false)
     MovieSessionEntity session;
 }

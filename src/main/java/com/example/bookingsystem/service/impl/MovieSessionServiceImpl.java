@@ -8,6 +8,7 @@ import com.example.bookingsystem.mapper.MovieSessionMapper;
 import com.example.bookingsystem.repository.MovieSessionRepository;
 import com.example.bookingsystem.service.MovieSessionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MovieSessionServiceImpl implements MovieSessionService {
     private final MovieSessionRepository movieSessionRepository;
     private final MovieServiceImpl movieService;
@@ -39,6 +41,8 @@ public class MovieSessionServiceImpl implements MovieSessionService {
         var cinema = cinemaService
                             .getCinemaById(movieSession.getCinemaId())
                             .orElseThrow(() -> new RuntimeException("Cinema with this id " + movieSession.getMovieId() + " not found!"));
+        log.info(cinema.getName());
+        log.info(cinemaMapper.toEntity(cinema).getName());
         movieSessionEntity.setCinema(cinemaMapper.toEntity(cinema));
         movieSessionEntity.setShowTime(movieSession.getShowTime());
         return movieSessionRepository.save(movieSessionEntity).getId();

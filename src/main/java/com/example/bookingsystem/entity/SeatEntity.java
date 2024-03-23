@@ -18,13 +18,13 @@ public class SeatEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     Long id;
-    @Column(name = "row")
+    @Column(name = "seat_row")
     Integer row;
     @Column(name = "place")
     Integer place;
     @Column(name = "seat_status")
     StatusSeat statusSeat;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "session_id")
+    @JoinColumn(name = "session_id", nullable = false)
     MovieSessionEntity session;
 }

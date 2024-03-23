@@ -68,7 +68,7 @@ public class OrderServiceImplTest {
         when(orderRepository.findById(id)).thenReturn(Optional.of(orderEntity));
 
         // Calling the method
-        String result = orderService.confirmOrder(id);
+        String result = orderService.confirmOrder(id, 1L);
 
         // Verifying the result
         assertEquals("Статус платежа: " + OrderStatus.STATUS_SUCCESS, result);
@@ -85,7 +85,7 @@ public class OrderServiceImplTest {
         when(orderRepository.findById(id)).thenReturn(Optional.of(orderEntity));
 
         // Calling the method
-        String result = orderService.rollbackPayment(id);
+        String result = orderService.rollbackPayment(id, 1L);
 
         // Verifying the result
         assertEquals("Payment Rollbacked", result);
