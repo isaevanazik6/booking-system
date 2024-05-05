@@ -1,4 +1,5 @@
 package com.example.bookingsystem.controller;
+
 import com.example.bookingsystem.dto.Cinema;
 import com.example.bookingsystem.entity.CinemaEntity;
 import com.example.bookingsystem.service.CinemaService;
