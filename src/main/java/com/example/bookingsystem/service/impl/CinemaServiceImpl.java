@@ -47,6 +47,8 @@ public class CinemaServiceImpl implements CinemaService {
         if (existingMovieOptional.isPresent()) {
             CinemaEntity existingMovie = existingMovieOptional.get();
             existingMovie.setName(updatedCinema.getName());
+            existingMovie.setCapacity(updatedCinema.getCapacity());
+            existingMovie.setLocation(updatedCinema.getLocation());
             return cinemaRepository.save(existingMovie).getId();
         } else {
             throw new RuntimeException("Movie with id " + cinemaId + " not found");

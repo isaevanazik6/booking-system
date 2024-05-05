@@ -10,7 +10,13 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface SeatMapper {
-    Seat toDto(SeatEntity seatEntity);
+    default Seat toDto(SeatEntity seatEntity) {
+        Seat seat = new Seat();
+        seat.setPlace(seatEntity.getPlace());
+        seat.setRow(seatEntity.getRow());
+        seat.setMovieSessionId(seatEntity.getSession().getId());
+        return seat;
+    };
 
     SeatEntity toEntity(Seat seat);
 

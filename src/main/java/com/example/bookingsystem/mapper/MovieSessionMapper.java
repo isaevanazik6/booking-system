@@ -10,7 +10,14 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface MovieSessionMapper {
-    MovieSession toDto(MovieSessionEntity movieSessionEntity);
+    default MovieSession toDto(MovieSessionEntity movieSessionEntity) {
+        MovieSession movieSession = new MovieSession();
+        movieSession.setShowTime(movieSessionEntity.getShowTime());
+        movieSession.setCinemaId(movieSessionEntity.getCinema().getId());
+        movieSession.setMovieId(movieSessionEntity.getMovie().getId());
+
+        return movieSession;
+    };
 
     MovieSessionEntity toEntity(MovieSession movieSession);
 

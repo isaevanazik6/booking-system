@@ -29,7 +29,7 @@ CREATE TABLE seats (
     seat_row INT,
     place INT,
     seat_status VARCHAR(255) DEFAULT 'AVAILABLE',
-    session_id INT,
+    session_id INT NOT NULL DEFAULT 1,
     FOREIGN KEY (session_id) REFERENCES movie_sessions(id)
 );
 
@@ -40,6 +40,6 @@ CREATE TABLE orders (
      status VARCHAR(255),
      created_at timestamp,
      updated_at timestamp,
-     session_id INT,
+     session_id INT NOT NULL DEFAULT 1,
      FOREIGN KEY (session_id) REFERENCES movie_sessions(id)
 );

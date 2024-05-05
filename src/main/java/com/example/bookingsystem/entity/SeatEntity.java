@@ -25,6 +25,6 @@ public class SeatEntity {
     @Column(name = "seat_status")
     StatusSeat statusSeat;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "session_id", nullable = false)
+    @JoinColumn(name = "session_id")
     MovieSessionEntity session;
 }
