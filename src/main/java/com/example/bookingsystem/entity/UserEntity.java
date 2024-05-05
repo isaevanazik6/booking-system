@@ -1,11 +1,10 @@
 package com.example.bookingsystem.entity;
 
+import com.example.bookingsystem.entity.enum_classes.UserRole;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,50 +17,49 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "users")
 public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Integer id;
+    private Integer id;
 
     @Column(name = "phone_number")
-    String phoneNumber;
+    private String phoneNumber;
 
     @Column(name = "password")
-    String password;
+    private String password;
 
     @Column(name = "role_user")
     @Enumerated(value = EnumType.STRING)
-    UserRole userRole;
+    private UserRole userRole;
 
     @Column(name = "first_name")
-    String firstName;
+    private String firstName;
 
     @Column(name = "last_name")
-    String lastName;
+    private String lastName;
 
     @Column(name = "middle_name")
-    String middleName;
+    private String middleName;
 
     @Column(name = "credentials_expiry_date")
-    LocalDateTime credentialsExpiryDate;
+    private LocalDateTime credentialsExpiryDate;
 
     @Column(name = "is_account_non_expired")
-    Boolean isAccountExpired;
+    private Boolean isAccountExpired;
 
     @Column(name = "is_account_non_locked")
-    Boolean isAccountLocked;
+    private Boolean isAccountLocked;
 
     @Column(name = "is_active", nullable = false)
-    Boolean isActive;
+    private Boolean isActive;
 
     @Column(name = "is_enabled")
-    Boolean isEnabled;
+    private Boolean isEnabled;
 
     @Column(name = "created_at")
-    LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
