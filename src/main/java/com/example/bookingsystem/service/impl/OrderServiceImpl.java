@@ -37,7 +37,6 @@ public class OrderServiceImpl implements OrderService {
         orderEntity.setCreated_at(Timestamp.from(Instant.now()));
         orderEntity.setTotalPrice(order.getTotalPrice());
         orderEntity.setNumberOfTickets(order.getNumberOfTickets());
-        orderEntity.setSession(movieSessionMapper.toEntity(sessionMovie));
 
         var seat = seatRepository
                 .findById(order.getSeatId())
